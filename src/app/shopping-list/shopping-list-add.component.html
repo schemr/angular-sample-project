@@ -9,7 +9,7 @@
             id="item-name"
             required
             class="form-control"
-            ngModel
+            [ngModel]="item.name"
             name="name">
         </div>
 
@@ -20,7 +20,7 @@
             id="item-amount"
             required
             class="form-control"
-            ngModel
+            [ngModel]="item.amount"
             name="amount">
         </div>
       </div>
