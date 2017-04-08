@@ -1,22 +1,33 @@
 import { Ingredient } from '../shared/ingredient'
+import { Subject } from 'rxjs/Subject';
 
 export class ShoppingListService {
+  itemChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
   private items: Ingredient[] = [];
   constructor() { }
 
   getItems(){
     return this.items;
   }
+  getItem(index: number){
+    return this.items[index];
+  }
   addItems(items: Ingredient[]){
-    Array.prototype.push.apply(this.items, items);
+    //Array.prototype.push.apply(this.items, items);
+    this.items.push(...items);
+    this.itemChanged.next(this.items.slice());
   }
   addItem(item: Ingredient){
     this.items.push(item);
+    this.itemChanged.next(this.items.slice());
   }
-  editItem(oldItem: Ingredient, newItem: Ingredient){
-    this.items[this.items.indexOf(oldItem)] = newItem;
+  editItem(index: number, newItem: Ingredient){
+    this.items[index] = newItem;
+    this.itemChanged.next(this.items.slice());
   }
-  deleteItem(item: Ingredient){
-    this.items.splice(this.items.indexOf(item), 1);
+  deleteItem(index: number){
+    this.items.splice(index, 1);
+    this.itemChanged.next(this.items.slice());
   }
 }

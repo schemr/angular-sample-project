@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form id="shopping-list-add" (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+    <form id="shopping-list-add" (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="item-name">Name</label>
@@ -9,7 +9,7 @@
             id="item-name"
             required
             class="form-control"
-            [ngModel]="item.name"
+            ngModel
             name="name">
         </div>
 
@@ -20,17 +20,16 @@
             id="item-amount"
             required
             class="form-control"
-            [ngModel]="item.amount"
+            ngModel
             name="amount"
             pattern="^[1-9]+[0-9]*$">
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" *ngIf="isAdd" [disabled]="!f.valid">Add</button>
-          <button class="btn btn-success" type="submit" *ngIf="!isAdd" [disabled]="!f.valid">Save</button>
-          <button class="btn btn-danger" type="button" *ngIf="!isAdd" (click)="onDelete()">Delete Item</button>
-          <button class="btn btn-primary" type="button" *ngIf="!isAdd" (click)="onClear()">Clear</button>
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'Edit' : 'Add'}}</button>
+          <button class="btn btn-danger" type="button" *ngIf="editMode" (click)="onDelete()">Delete Item</button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
         </div>
       </div>
     </form>
