@@ -1,5 +1,5 @@
-import { ShoppingListService } from './shopping-list.service';
-import { Ingredient } from '../shared/ingredient';
+import { ShoppingListService } from '../shopping-list.service';
+import { Ingredient } from '../../shared/ingredient';
 import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({

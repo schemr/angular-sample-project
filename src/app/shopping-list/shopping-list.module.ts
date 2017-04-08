@@ -1,18 +1,18 @@
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-import { DropdownDirective } from '../dropdown.directive';
 import { ShoppingListComponent } from './shopping-list.component';
-import { NgModule } from '@angular/core';
+import { ShoppingListAddComponent } from './shopping-edit/shopping-list-add.component';
+
 
 @NgModule({
     declarations:[
-        ShoppingListComponent
+        ShoppingListComponent,
+        ShoppingListAddComponent
     ],
     imports:[
         CommonModule,
-        FormsModule,
-        DropdownDirective
+        FormsModule
     ]
 })
 

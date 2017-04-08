@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app.routing';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header.component';
-import { ShoppingListAddComponent } from './shopping-list/shopping-list-add.component';
 
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
@@ -16,7 +15,6 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListAddComponent,
   ],
   imports: [
     BrowserModule,
