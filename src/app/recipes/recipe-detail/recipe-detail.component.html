@@ -8,9 +8,16 @@
     <h1>{{selectedRecipe?.name}}</h1>
   </div>
   <div class="col-xs-12">
-    <button class="btn btn-success" (click)="onAddToShoppingList()">To Shopping List</button>
-    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
-    <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+    <div class="btn-group" rbDropdown>
+      <button type="button" class="btn btn-primary dropdown-toggle">
+        Manage Recipe <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
+        <li><a (click)="onEdit()" style="cursor: pointer;">Edit</a></li>
+        <li><a (click)="onDelete()" style="cursor: pointer;">Delete</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 <hr>
