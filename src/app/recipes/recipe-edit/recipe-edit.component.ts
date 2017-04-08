@@ -2,7 +2,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Recipe } from '../recipe';
 import { Subscription } from 'rxjs/Rx';
 import { RecipeService } from '../recipe.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
@@ -22,7 +22,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(
-      (params: any) => {
+      (params: Params) => {
         if(params.hasOwnProperty('id')){
           this.isNew = false;
           this.recipeIndex = +params['id'];
