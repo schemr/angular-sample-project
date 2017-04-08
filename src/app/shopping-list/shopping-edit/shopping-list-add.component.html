@@ -16,12 +16,13 @@
         <div class="col-sm-2 form-group">
           <label for="item-amount">Amount</label>
           <input
-            type="text"
+            type="number"
             id="item-amount"
             required
             class="form-control"
             [ngModel]="item.amount"
-            name="amount">
+            name="amount"
+            pattern="^[1-9]+[0-9]*$">
         </div>
       </div>
       <div class="row">
