@@ -6,10 +6,11 @@ import { RecipesModule } from './recipes/recipes.module';
 import { AppRoutingModule } from './app.routing';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from './header/header.component';
 
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { DataStorageService } from './shared/data-storage.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     SharedModule,
     ShoppingListModule
   ],
-  providers: [RecipeService, ShoppingListService],
+  providers: [RecipeService, ShoppingListService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
