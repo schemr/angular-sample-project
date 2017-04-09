@@ -4,7 +4,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { SignupComponent } from './auth/signup/signup.component';
 
 const APP_ROUTES: Routes = [
-    { path: '', redirectTo: '/recipes', pathMatch: 'full'},
+    { path: '', component: SignupComponent},
     { path: 'shopping-list', component: ShoppingListComponent},
     { path: 'signup', component: SignupComponent}
 ]

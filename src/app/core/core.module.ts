@@ -6,6 +6,7 @@ import { AppRoutingModule } from '../app.routing';
 import { DataStorageService } from '../shared/data-storage.service';
 import { RecipeService } from '../recipes/recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { AuthService } from '../auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
   providers: [
     ShoppingListService,
     RecipeService,
-    DataStorageService
+    DataStorageService,
+    AuthService
   ]
 })
 export class CoreModule {}
