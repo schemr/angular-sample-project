@@ -34,7 +34,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/recipes', this.recipeIndex, 'edit']);
   }
   onDelete(){
-    this.recipesService.deleteRecipe(this.selectedRecipe);
+    this.recipesService.deleteRecipe(this.recipeIndex);
     this.router.navigate(['/recipes']);
   }
   onAddToShoppingList(){
