@@ -43,11 +43,11 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     }else{
       this.recipeService.addRecipe(newRecipe);
     }
-    this.navigateBack();
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onCancel(){
-    this.navigateBack();
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onAddItem(name: string, amount: number){
@@ -62,7 +62,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     );
   }
   onRemoveItem(index: number){
-    (<FormArray>this.recipeForm.controls['ingredients']).removeAt(index);
+    (<FormArray>this.recipeForm.get(
+      'ingredients')).removeAt(index);
   }
 
   private navigateBack(){
