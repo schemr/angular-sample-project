@@ -1,13 +1,14 @@
+import { Subject } from 'rxjs/Subject';
 import { Ingredient } from '../shared/ingredient';
 import { Headers, Http, Response } from '@angular/http';
 
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from './recipe';
 import 'rxjs/Rx';
 
 @Injectable()
 export class RecipeService {
-  recipesChanged = new EventEmitter<Recipe[]>();
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe('Raw beef', 'yukhoe', 'http://cfile23.uf.tistory.com/image/2670E23C517F791A188B75', [
@@ -29,10 +30,13 @@ export class RecipeService {
     return this.recipes.splice(this.recipes.indexOf(recipe), 1)
   }
   addRecipe(recipe: Recipe){
-    return this.recipes.push(recipe);
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+
   }
-  editRecipe(oldRecipe: Recipe, newRecipe: Recipe){
-    this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
+  editRecipe(index: number, newRecipe: Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
   }
   storeData(){
     const body = JSON.stringify(this.recipes);
@@ -47,7 +51,7 @@ export class RecipeService {
       .subscribe(
         (data: Recipe[]) => {
           this.recipes = data;
-          this.recipesChanged.emit(this.recipes);
+          this.recipesChanged.next(this.recipes.slice());
         }
       )
   }
