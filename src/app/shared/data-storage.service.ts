@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { Recipe } from '../recipes/recipe'; 
 import { RecipeService } from '../recipes/recipe.service';
 import { AuthService } from '../auth/auth.service';
@@ -14,13 +14,15 @@ export class DataStorageService{
         private authService: AuthService){}
 
     storeRecipes(){
-        const token = this.authService.getToken();
-        return this.httpClient.put('https://recipebook-3eaba.firebaseio.com/recipes.json?auth=' + token, this.recipeService.getRecipes() )
+        const req = new HttpRequest('PUT', 'https://recipebook-3eaba.firebaseio.com/recipes.json', this.recipeService.getRecipes(), {reportProgress: true});
+        return this.httpClient.request(req);
     }
 
     getRecipes(){
-        const token = this.authService.getToken();
-        this.httpClient.get<Recipe[]>('https://recipebook-3eaba.firebaseio.com/recipes.json?auth=' + token)
+        this.httpClient.get<Recipe[]>('https://recipebook-3eaba.firebaseio.com/recipes.json', {
+            observe: 'body',
+            responseType: 'json'
+        })
             .map(
                 (recipes) => {
                     for (let recipe of recipes){
