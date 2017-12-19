@@ -7,19 +7,12 @@ export class ShoppingListService {
   private items: Ingredient[] = [];
   constructor() { }
 
-  getItems(){
-    return this.items;
-  }
   getItem(index: number){
     return this.items[index];
   }
   addItems(items: Ingredient[]){
     //Array.prototype.push.apply(this.items, items);
     this.items.push(...items);
-    this.itemChanged.next(this.items.slice());
-  }
-  addItem(item: Ingredient){
-    this.items.push(item);
     this.itemChanged.next(this.items.slice());
   }
   editItem(index: number, newItem: Ingredient){

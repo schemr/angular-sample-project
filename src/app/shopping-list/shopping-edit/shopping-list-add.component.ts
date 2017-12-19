@@ -1,4 +1,6 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as ShoppingListActions from '../store/shopping-list.actions';
 import { Ingredient } from '../../shared/ingredient';
 import { ShoppingListService } from '../shopping-list.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -15,7 +17,7 @@ export class ShoppingListAddComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Ingredient;
 
-  constructor(private sls: ShoppingListService) { }
+  constructor(private sls: ShoppingListService, private store: Store<{shoppingList:{items: Ingredient[]}}>) { }
 
   ngOnInit() {
     this.subscription = this.sls.startedEditing
@@ -37,7 +39,7 @@ export class ShoppingListAddComponent implements OnInit, OnDestroy {
     if(this.editMode){
       this.sls.editItem(this.editedItemIndex, newIngredient);
     }else{
-      this.sls.addItem(newIngredient);
+      this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
     this.editMode = false;
     form.reset();
