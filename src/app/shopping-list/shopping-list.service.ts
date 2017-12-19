@@ -10,11 +10,6 @@ export class ShoppingListService {
   getItem(index: number){
     return this.items[index];
   }
-  addItems(items: Ingredient[]){
-    //Array.prototype.push.apply(this.items, items);
-    this.items.push(...items);
-    this.itemChanged.next(this.items.slice());
-  }
   editItem(index: number, newItem: Ingredient){
     this.items[index] = newItem;
     this.itemChanged.next(this.items.slice());
