@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as ShoppingListModel from '../../shopping-list/store/shopping-list.reducer';
+import * as AppReducer from '../../store/app.reducer';
 
 @Component({
   selector: 'rb-recipe-detail',
@@ -19,7 +19,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private recipesService: RecipeService,
               private router: Router,
-              private store: Store<ShoppingListModel.AppState>) { }
+              private store: Store<AppReducer.AppState>) { }
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(
