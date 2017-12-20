@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as AppReducer from '../store/app.reducer';
 import * as AuthReducer from '../auth/store/auth.reducer';
+import 'rxjs/add/operator/take';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

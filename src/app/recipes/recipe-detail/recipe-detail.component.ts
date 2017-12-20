@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
 import * as RecipeReducer from '../store/recipe.reducer';
 import * as RecipeActions from '../store/recipe.actions';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'rb-recipe-detail',
