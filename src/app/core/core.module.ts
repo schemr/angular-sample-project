@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { DataStorageService } from '../shared/data-storage.service';
 import { RecipeService } from '../recipes/recipe.service';
-import { AuthService } from '../auth/auth.service';
 import { AuthInterceptor } from '../shared/auth.interceptor';
 
 
@@ -27,7 +26,6 @@ import { AuthInterceptor } from '../shared/auth.interceptor';
   providers: [
     RecipeService,
     DataStorageService,
-    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
