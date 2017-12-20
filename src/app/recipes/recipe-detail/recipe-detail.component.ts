@@ -1,11 +1,11 @@
-import { RecipeService } from '../recipe.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Recipe } from '../recipe';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as AppReducer from '../../store/app.reducer';
+import * as RecipeReducer from '../store/recipe.reducer';
+import * as RecipeActions from '../store/recipe.actions';
 
 @Component({
   selector: 'rb-recipe-detail',
@@ -14,18 +14,17 @@ import * as AppReducer from '../../store/app.reducer';
 export class RecipeDetailComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private recipeIndex: number;
-  selectedRecipe: Recipe;
+  recipeState: Observable<RecipeReducer.State>;
 
   constructor(private route: ActivatedRoute,
-              private recipesService: RecipeService,
               private router: Router,
-              private store: Store<AppReducer.AppState>) { }
+              private store: Store<RecipeReducer.RecipeState>) { }
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(
       (params: Params) => {
         this.recipeIndex = params['id'];
-        this.selectedRecipe = this.recipesService.getRecipe(this.recipeIndex);
+        this.recipeState = this.store.select('recipes');
       }
     )
   }
@@ -36,10 +35,14 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/recipes', this.recipeIndex, 'edit']);
   }
   onDelete(){
-    this.recipesService.deleteRecipe(this.recipeIndex);
+    this.store.dispatch(new RecipeActions.DeleteRecipe(this.recipeIndex))
     this.router.navigate(['/recipes']);
   }
   onAddToShoppingList(){
-    this.store.dispatch(new ShoppingListActions.AddIngredients(this.selectedRecipe.ingredients))
+    this.store.select('recipes')
+      .take(1)
+      .subscribe((recipeState: RecipeReducer.State) => {
+        this.store.dispatch(new ShoppingListActions.AddIngredients(recipeState.recipes[this.recipeIndex].ingredients))
+      })
   }
 }
