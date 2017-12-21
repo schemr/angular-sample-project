@@ -14,7 +14,7 @@ import 'rxjs/add/operator/take';
 })
 export class RecipeDetailComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private recipeIndex: number;
+  recipeIndex: number;
   recipeState: Observable<RecipeReducer.State>;
 
   constructor(private route: ActivatedRoute,
